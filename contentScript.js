@@ -34,6 +34,28 @@
                 }
             });
         });
+        
+        //get all short answers
+
+        Array.from(document.getElementsByClassName("zb-button  secondary              show-answer-button")).forEach(showAnswer =>{
+            showAnswer.click();
+            showAnswer.click();
+        })
+
+        await sleep(1000);
+
+        Array.from(document.getElementsByClassName("interactive-activity-container short-answer-content-resource participation large ember-view")).forEach(shortAnswer => {
+            Array.from(shortAnswer.getElementsByClassName("question-set-question short-answer-question ember-view")).forEach(async shortQuestion =>{
+                var answer = shortQuestion.getElementsByClassName("forfeit-answer")[0].textContent.trim();
+                shortQuestion.getElementsByClassName("ember-text-area ember-view zb-text-area hide-scrollbar")[0].value = answer;
+                await sleep(1000);
+                shortQuestion.getElementsByClassName("ember-text-area ember-view zb-text-area hide-scrollbar")[0].dispatchEvent(new Event('change'));
+                shortQuestion.getElementsByClassName("zb-button  primary  raised            check-button")[0].click();
+            });
+        });
+        
+
+
     });
 })();
 

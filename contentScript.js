@@ -24,13 +24,16 @@
             await sleep(5000);
         }
 
-        //get all true/false
+        //get all multiple choice
         Array.from(document.getElementsByClassName("interactive-activity-container multiple-choice-content-resource")).forEach(multipleChoice =>{
             Array.from(multipleChoice.getElementsByClassName("question-set-question multiple-choice-question ember-view")).forEach(async multiQuestion => {
                 multiQuestion.getElementsByClassName("question-choices")[0].querySelectorAll('input')[0].click();
                 await sleep(1000);
-                if(multiQuestion.getElementsByClassName("zb-explanation has-explanation correct").length !== 1){
-                    multiQuestion.getElementsByClassName("question-choices")[0].querySelectorAll('input')[1].click();
+                var counter = 1;
+                while(multiQuestion.getElementsByClassName("zb-explanation has-explanation correct").length !== 1){
+                    multiQuestion.getElementsByClassName("question-choices")[0].querySelectorAll('input')[counter].click();
+                    counter++;
+                    await sleep(1000);
                 }
             });
         });
@@ -53,8 +56,6 @@
                 shortQuestion.getElementsByClassName("zb-button  primary  raised            check-button")[0].click();
             });
         });
-        
-
 
     });
 })();
